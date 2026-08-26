@@ -15,6 +15,9 @@ export default function Home() {
     return icons[category] || '🧮';
   };
 
+
+
+
   return (
     <div>
       <Hero />

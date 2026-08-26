@@ -43,41 +43,58 @@ export default function RootLayout({
         <meta name="theme-color" content="#4F46E5" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* AdSense script - WITHOUT data-nscript */}
+        {/* AdSense script */}
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"
           crossOrigin="anonymous"
         />
       </head>
-      <body className="bg-gray-50 antialiased">
+      <body className="bg-gray-50 antialiased min-h-screen flex flex-col">
+        {/* ✅ NavBar - Fixed at top */}
         <NavBar />
-        <main className="pt-16 md:pt-20 min-h-screen">
+        
+        {/* ✅ Main content - Pushed down, grows to fill space */}
+        <main className="pt-16 md:pt-20 flex-grow">
           {children}
         </main>
+        
+        {/* ✅ Footer - ALWAYS at bottom on EVERY page */}
         <footer className="bg-gray-900 text-gray-400 py-12 mt-12">
           <div className="max-w-6xl mx-auto px-4">
+            {/* Footer Columns - Side by side on all devices */}
             <div className="flex flex-wrap justify-between gap-6 md:gap-8 mb-8">
+              
+              {/* Column 1: Product */}
               <div className="flex-1 min-w-[120px]">
                 <h4 className="text-white font-semibold mb-3">Product</h4>
                 <Link href="/#tools" className="block hover:text-white transition py-1">All Calculators</Link>
                 <Link href="/about" className="block hover:text-white transition py-1">About</Link>
               </div>
+              
+              {/* Column 2: Company */}
               <div className="flex-1 min-w-[120px]">
                 <h4 className="text-white font-semibold mb-3">Company</h4>
                 <Link href="/about" className="block hover:text-white transition py-1">About Us</Link>
                 <Link href="/contact" className="block hover:text-white transition py-1">Contact</Link>
               </div>
+              
+              {/* Column 3: Legal */}
               <div className="flex-1 min-w-[120px]">
                 <h4 className="text-white font-semibold mb-3">Legal</h4>
                 <Link href="/privacy" className="block hover:text-white transition py-1">Privacy Policy</Link>
               </div>
+              
+              {/* Column 4: Social */}
               <div className="flex-1 min-w-[120px]">
                 <h4 className="text-white font-semibold mb-3">Social</h4>
                 <a href="#" className="block hover:text-white transition py-1">Twitter</a>
                 <a href="#" className="block hover:text-white transition py-1">GitHub</a>
               </div>
+              
             </div>
+            
+            {/* Bottom Bar */}
             <div className="border-t border-gray-800 pt-6 text-center text-sm">
               <p>© 2025 CalcCent. Built with ❤️ for speed and utility.</p>
               <p className="text-xs mt-1 text-gray-600">Every percent, instantly calculated.</p>

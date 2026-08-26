@@ -197,3 +197,88 @@ select {
   .input-modern::placeholder { color: #64748B; }
   select { color: #F8FAFC; background-color: #1E293B; border-color: #334155; }
 }
+
+/* ===== NAVBAR FULL WIDTH FIX ===== */
+
+/* Navbar always full width */
+nav.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 50;
+  height: 64px; /* h-16 */
+}
+
+@media (min-width: 768px) {
+  nav.fixed {
+    height: 80px; /* h-20 */
+  }
+}
+
+/* Main content padding to prevent overlap */
+main {
+  padding-top: 64px; /* Matches navbar height on mobile */
+  min-height: 100vh;
+}
+
+@media (min-width: 768px) {
+  main {
+    padding-top: 80px; /* Matches navbar height on desktop */
+  }
+}
+
+/* Ensure all pages start below navbar */
+#__next, .page-wrapper {
+  padding-top: 0;
+}
+
+/* Mobile menu overlay - full width */
+#mobile-menu {
+  width: 100%;
+  left: 0;
+  right: 0;
+}
+
+/* ===== ENSURE FOOTER SHOWS ON ALL PAGES ===== */
+
+/* Make body and html full height */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Flex column layout to push footer to bottom */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main content grows to push footer down */
+main {
+  flex: 1 0 auto;
+  padding-top: 64px; /* h-16 */
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  main {
+    padding-top: 80px; /* h-20 */
+  }
+}
+
+/* Footer stays at bottom */
+footer {
+  flex-shrink: 0;
+  width: 100%;
+}
+
+/* Ensure all pages have proper spacing */
+.page-container {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
