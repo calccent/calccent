@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 
-// ALL 50 MODES (same as before)
+// ===== ALL 50 MODES =====
 type Mode = 
   | 'percentage-of' | 'what-percent' | 'increase' | 'decrease' | 'discount' | 'tip' 
   | 'sales-tax' | 'vat' | 'profit-margin' | 'markup' | 'gross-profit' | 'net-profit' 
@@ -16,8 +16,10 @@ type Mode =
   | 'employee-turnover' | 'stock-split' | 'food-cost' | 'inventory-turnover' | 'rent-vs-buy' 
   | 'expense-ratio' | 'electricity-cost' | 'profit-sharing' | 'defect-rate';
 
+// ===== RESULT FORMAT TYPE =====
 type ResultFormat = 'currency' | 'percent' | 'number' | 'none';
 
+// ===== MODE LABELS =====
 const MODE_LABELS: Record<Mode, string> = {
   'percentage-of': 'X% of Y',
   'what-percent': 'X is what % of Y',
@@ -83,6 +85,7 @@ const MODE_LABELS: Record<Mode, string> = {
   'defect-rate': 'Defect Rate',
 };
 
+// ===== MODE GROUPS =====
 const MODE_GROUPS = {
   'Basic Percentage': ['percentage-of', 'what-percent', 'increase', 'decrease', 'percentage-difference'],
   'Shopping & Money': ['discount', 'tip', 'price-increase', 'price-decrease', 'shipping-cost'],
@@ -95,7 +98,7 @@ const MODE_GROUPS = {
   'Other': ['time-percentage', 'abv', 'electricity-cost', 'rent-vs-buy'],
 };
 
-// Safe copy function
+// ===== COPY FUNCTION =====
 const copyToClipboard = (text: string) => {
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
@@ -119,7 +122,7 @@ const fallbackCopy = (text: string) => {
   }
 };
 
-// ✅ NEW: Format the result based on the mode
+// ===== FORMATTING FUNCTIONS =====
 const getResultFormat = (mode: Mode): ResultFormat => {
   const currencyModes: Mode[] = [
     'discount', 'tip', 'sales-tax', 'vat', 'gst', 'hst', 'pst',
@@ -153,10 +156,9 @@ const getResultFormat = (mode: Mode): ResultFormat => {
   if (percentModes.includes(mode)) return 'percent';
   if (numberModes.includes(mode)) return 'number';
   if (noneModes.includes(mode)) return 'none';
-  return 'number'; // default
+  return 'number';
 };
 
-// ✅ NEW: Format the display value
 const formatResult = (value: string | number, format: ResultFormat): string => {
   const num = typeof value === 'string' ? parseFloat(value) : value;
   if (isNaN(num)) return String(value);
@@ -175,6 +177,7 @@ const formatResult = (value: string | number, format: ResultFormat): string => {
   }
 };
 
+// ===== MAIN COMPONENT =====
 export default function UniversalCalculator({ 
   initialMode = 'percentage-of',
   initialNum1 = '',
@@ -193,12 +196,11 @@ export default function UniversalCalculator({
   const [result, setResult] = useState<{ value: string; label: string; format: ResultFormat } | null>(null);
   const [copied, setCopied] = useState(false);
 
-  // Sync with initialMode when it changes (when a tool is clicked)
+  // Sync props with state
   useEffect(() => {
     setMode(initialMode);
   }, [initialMode]);
 
-  // Sync input values when they change
   useEffect(() => {
     setNum1(initialNum1);
   }, [initialNum1]);
@@ -215,6 +217,7 @@ export default function UniversalCalculator({
     return ['compound-interest', 'final-grade', 'bmr', 'loan-interest', 'calorie-burn', 'cagr', 'margin-call', 'dcf'].includes(mode);
   };
 
+  // ===== CALCULATION LOGIC =====
   const calculate = () => {
     const a = parseFloat(num1);
     const b = parseFloat(num2);
@@ -560,10 +563,12 @@ export default function UniversalCalculator({
     });
   };
 
+  // ===== RE-CALCULATE WHEN INPUTS CHANGE =====
   useEffect(() => {
     calculate();
   }, [mode, num1, num2, num3]);
 
+  // ===== PLACEHOLDERS =====
   const getPlaceholders = () => {
     const map: Record<Mode, { n1: string; n2: string; n3: string }> = {
       'percentage-of': { n1: 'Percentage %', n2: 'Number', n3: '' },
@@ -644,6 +649,7 @@ export default function UniversalCalculator({
     }
   };
 
+  // ===== RENDER =====
   return (
     <div className="bg-white rounded-3xl shadow-2xl p-5 md:p-8 border border-gray-100">
       <div className="flex items-center gap-3 mb-6">
@@ -714,7 +720,6 @@ export default function UniversalCalculator({
         <div className="mt-6 p-5 rounded-2xl bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-100 animate-fadeInScale">
           <p className="text-sm text-gray-600 font-medium">{result.label}</p>
           <div className="flex items-center justify-between mt-1 flex-wrap gap-3">
-            {/* ✅ FORMATTED RESULT */}
             <p className="text-2xl md:text-3xl font-extrabold text-indigo-600">
               {formatResult(result.value, result.format)}
             </p>

@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://calccent.com
+
+# Sitemaps
+Sitemap: https://calccent.com/sitemap.xml

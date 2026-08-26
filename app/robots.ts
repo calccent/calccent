@@ -4,6 +4,6 @@ export default function robots() {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://calccent.com/sitemap.xml', // ← CHANGE TO YOUR REAL DOMAIN
+    sitemap: 'https://calccent.com/sitemap.xml', // CHANGE TO YOUR DOMAIN
   };
 }

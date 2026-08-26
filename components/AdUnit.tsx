@@ -18,11 +18,7 @@ export default function AdUnit() {
       },
       { threshold: 0.1 }
     );
-
-    if (adContainerRef.current) {
-      observer.observe(adContainerRef.current);
-    }
-
+    if (adContainerRef.current) observer.observe(adContainerRef.current);
     return () => observer.disconnect();
   }, []);
 
@@ -32,10 +28,8 @@ export default function AdUnit() {
         const container = adContainerRef.current;
         const rect = container.getBoundingClientRect();
         if (rect.width === 0) return;
-
         const existingAds = container.querySelectorAll('ins.adsbygoogle');
         if (existingAds.length > 0) return;
-
         (window as any).adsbygoogle = (window as any).adsbygoogle || [];
         (window as any).adsbygoogle.push({});
         adRenderedRef.current = true;
@@ -46,18 +40,8 @@ export default function AdUnit() {
   }, [isVisible]);
 
   return (
-    <div 
-      ref={adContainerRef} 
-      className="my-6 flex justify-center min-h-[90px] min-w-[200px] bg-gray-50/50 rounded-2xl overflow-hidden border border-gray-100"
-    >
-      <ins
-        className="adsbygoogle"
-        style={{ display: 'block' }}
-        data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
-        data-ad-slot="YOUR_AD_UNIT_ID"
-        data-ad-format="auto"
-        data-full-width-responsive="true"
-      ></ins>
+    <div ref={adContainerRef} className="my-6 flex justify-center min-h-[90px] min-w-[200px] bg-gray-50/50 rounded-2xl overflow-hidden border border-gray-100">
+      <ins className="adsbygoogle" style={{ display: 'block' }} data-ad-client="ca-pub-YOUR_PUBLISHER_ID" data-ad-slot="YOUR_AD_UNIT_ID" data-ad-format="auto" data-full-width-responsive="true"></ins>
     </div>
   );
 }

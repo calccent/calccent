@@ -57,22 +57,22 @@ export default function RootLayout({
         </main>
         <footer className="bg-gray-900 text-gray-400 py-12 mt-12">
           <div className="max-w-6xl mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-              <div>
+            <div className="flex flex-wrap justify-between gap-6 md:gap-8 mb-8">
+              <div className="flex-1 min-w-[120px]">
                 <h4 className="text-white font-semibold mb-3">Product</h4>
                 <Link href="/#tools" className="block hover:text-white transition py-1">All Calculators</Link>
                 <Link href="/about" className="block hover:text-white transition py-1">About</Link>
               </div>
-              <div>
+              <div className="flex-1 min-w-[120px]">
                 <h4 className="text-white font-semibold mb-3">Company</h4>
                 <Link href="/about" className="block hover:text-white transition py-1">About Us</Link>
                 <Link href="/contact" className="block hover:text-white transition py-1">Contact</Link>
               </div>
-              <div>
+              <div className="flex-1 min-w-[120px]">
                 <h4 className="text-white font-semibold mb-3">Legal</h4>
                 <Link href="/privacy" className="block hover:text-white transition py-1">Privacy Policy</Link>
               </div>
-              <div>
+              <div className="flex-1 min-w-[120px]">
                 <h4 className="text-white font-semibold mb-3">Social</h4>
                 <a href="#" className="block hover:text-white transition py-1">Twitter</a>
                 <a href="#" className="block hover:text-white transition py-1">GitHub</a>
